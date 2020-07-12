@@ -265,7 +265,7 @@
                   }else{
                     var flag=true
                     for(let i=0;i<this.criminal_cars_table.length;i++){
-                      if(res.data[0]['id']===this.criminal_cars_table['id']&&res.data[0]['info_type']===this.criminal_cars_table['info_type']) {
+                      if(res.data[0]['number_plate']===this.criminal_cars_table['number_plate']&&res.data[0]['info_type']===this.criminal_cars_table['info_type']) {
                             flag=false
                             break
                       }
