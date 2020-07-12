@@ -117,7 +117,8 @@ export default {
     tackledata(data) {
       // eslint-disable-next-line no-unused-vars
       var criminal_type = {
-        illegal_parking: '违规停车'
+        illegal_parking: '违规停车',
+        illegal_occupation: '违法占用车道'
       }
       var type = {
         car: '轿车',
