@@ -256,6 +256,29 @@ export default {
       localStorage.setItem('video',JSON.stringify(data))
       if (ar_length==0){
         //TODO:用于没有2违规的场景组件
+        var submit_task_url = '/api/task/submit'
+        console.log(this.form)
+        console.log('调用了')
+        var data= {
+          task_name:this.name,
+          cfg_data: {
+            filename:this.name
+          },
+          task_type:this.scene,
+        }
+        this.$axios.post(submit_task_url,data).then(res => {
+          if (!res.data['is_success']) {
+            this.$message.error(res.data['info'])
+          } else {  // 任务提交成功成功弹出消息进行提示
+            this.$message({
+              message: res.data['info'],
+              type: 'success'
+            })
+          }
+        }).catch(error=>{
+          console.log(error)
+        })
+      console.log("flag的值为" +  this.flag);
       }else if (ar_length==1){
         //用于单个违规场景组件
         console.log(this.check_selected_components[0])
@@ -265,7 +288,6 @@ export default {
         }else{
           this.wfzycd_visible=true
         }
-
         this.$router.push({path: '/example/preparedata/index'})
 
       }else {
