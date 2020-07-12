@@ -37,13 +37,14 @@
             <el-button
               size="mini"
               @click="pop_dialog()">详情</el-button>
-            <el-dialog title="违规拍照记录" :visible.sync="dialog_table_visible" center :append-to-body='true' :lock-scroll="false"   width="80%" >
-              <el-carousel indicator-position="outside" height="600px">
-                <el-carousel-item v-for="item in criminal_data[scope.$index].img_path" :key="item">
+            <el-dialog title="违规拍照记录" :visible.sync="dialog_table_visible" center :append-to-body='true' :lock-scroll="false"   width="80%">
+              <el-carousel indicator-position="outside" :height="height">
+                <el-carousel-item v-for="item in criminal_data[scope.$index].img_path" :key="item" >
                   <el-image
-                    style="width: 100%; height: 100%"
+                    style="width: 100%;height: 100%"
                     :src="item"
-                    fit="fit">
+                    fit="fit"
+                  @load="onLoad">
                   </el-image>
                 </el-carousel-item>
               </el-carousel>
@@ -68,7 +69,9 @@ export default {
       input: '',
       dialog_table_visible: false,
       criminal_data:[
-      ]
+      ],
+      width:'',
+      height:''
     }
   },
   computed: {
@@ -137,6 +140,12 @@ export default {
     },
     pop_dialog() {
         this.dialog_table_visible=true
+    },
+    onLoad(){
+        this.height=screen.height*0.8+'px'
+      console.log(screen.height)
+      console.log(screen.width)
+      console.log(this.height)
     }
   }
 }

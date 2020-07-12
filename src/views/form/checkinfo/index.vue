@@ -61,12 +61,13 @@
                 size="mini"
                 @click="pop_dialog()">详情</el-button>
               <el-dialog title="违规拍照记录" :visible.sync="dialog_table_visible" center :append-to-body='true' :lock-scroll="false"   width="80%" >
-                <el-carousel indicator-position="outside" height="600px">
+                <el-carousel indicator-position="outside" :height="height">
                   <el-carousel-item v-for="item in criminal_cars_table[scope.$index].criminal_imgs" :key="item">
                     <el-image
                       style="width: 100%; height: 100%"
                       :src="item"
-                      fit="fit">
+                      fit="fit"
+                      @load="onLoad">
                     </el-image>
                   </el-carousel-item>
                 </el-carousel>
@@ -258,7 +259,20 @@
                     //'static/data/criminal/2020-05-27 14-26-50 483.0 1.jpg']
                   console.log("调用违规表")
                   console.log(res.data)
-                  this.criminal_cars_table.push(res.data[0])
+
+                  if(this.criminal_cars_table.length===0) {
+                    this.criminal_cars_table.push(res.data[0])
+                  }else{
+                    var flag=true
+                    for(let i=0;i<this.criminal_cars_table.length;i++){
+                      if(res.data[0]['id']===this.criminal_cars_table['id']&&res.data[0]['info_type']===this.criminal_cars_table['info_type']) {
+                            flag=false
+                            break
+                      }
+                    }
+                    if(flag)
+                      this.criminal_cars_table.push(res.data[0])
+                  }
                   this.illegal_key=Math.random()
                   console.log( this.criminal_cars_table)
                 }
@@ -294,6 +308,12 @@
           },
           pop_dialog() {
             this.dialog_table_visible=true
+          },
+          onLoad(){
+            this.height=screen.height*0.8+'px'
+            console.log(screen.height)
+            console.log(screen.width)
+            console.log(this.height)
           }
         }
     }
