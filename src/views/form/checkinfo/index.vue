@@ -62,7 +62,7 @@
                 @click="pop_dialog(scope.$index)">详情</el-button>
               <el-dialog title="违规拍照记录" :visible.sync="dialog_table_visible" center :append-to-body='true' :lock-scroll="false"   width="80%" >
                 <el-carousel indicator-position="outside" :height="height">
-                  <el-carousel-item v-for="item in criminal_cars_table[scope.$index].criminal_imgs" :key="item">
+                  <el-carousel-item v-for="item in criminal_cars_table[scope.$index].criminal_imgs" :key="scope.$index+''">
                     <el-image
                       style="width: 100%; height: 100%"
                       :src="item"
@@ -200,6 +200,7 @@
         },
         created(){
           this.task_name=this.$route.query.task_name
+          this.height=screen.height*0.8+'px'
         },
 
         mounted(){
