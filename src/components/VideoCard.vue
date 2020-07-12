@@ -5,14 +5,19 @@
       <transition name="el-zoom-in-top">
         <el-row v-show="show" style="margin:5px">
           <!-- 提交Task -->
+          <el-tooltip class="item" effect="dark" content="提交任务" placement="top-start">
           <el-popconfirm title="是否开始提交Task？" @onConfirm="submit_task" @onCancel="$message('取消操作')">
-            <el-button slot="reference" type="info" icon="el-icon-s-claim" circle />
+              <el-button slot="reference" type="info" icon="el-icon-s-claim" circle />
           </el-popconfirm>
+          </el-tooltip>
+
 
           <!-- 删除视频 -->
+          <el-tooltip class="item" effect="dark" content="删除视频" placement="top-start">
           <el-popconfirm title="你确定要删除此视频？" @onConfirm="delete_video" @onCancel="$message('取消操作')">
-            <el-button slot="reference" type="danger" icon="el-icon-delete" circle />
+              <el-button slot="reference" type="danger" icon="el-icon-delete" circle />
           </el-popconfirm>
+          </el-tooltip>
         </el-row>
       </transition>
     </el-card>

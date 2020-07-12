@@ -5,24 +5,32 @@
       <transition name="el-zoom-in-top">
         <el-row v-show="show" style="margin:5px">
           <!-- 启动Task -->
-          <el-popconfirm title="是否启动此任务？" @onConfirm="start_task" @onCancel="$message('取消操作')">
-            <el-button slot="reference" type="info" icon="el-icon-s-claim" circle />
-          </el-popconfirm>
+          <el-tooltip class="item" effect="dark" content="启动任务" placement="top-start">
+            <el-popconfirm title="是否启动此任务？" @onConfirm="start_task" @onCancel="$message('取消操作')">
+              <el-button slot="reference" type="info" icon="el-icon-s-claim" circle />
+            </el-popconfirm>
+          </el-tooltip>
 
           <!-- 挂起Task -->
-          <el-popconfirm title="你确定要挂起此任务？" @onConfirm="suspend_task" @onCancel="$message('取消操作')">
-            <el-button slot="reference" type="warning" icon="el-icon-remove-outline" circle />
-          </el-popconfirm>
+          <el-tooltip class="item" effect="dark" content="挂起任务" placement="top-start">
+            <el-popconfirm title="你确定要挂起此任务？" @onConfirm="suspend_task" @onCancel="$message('取消操作')">
+              <el-button slot="reference" type="warning" icon="el-icon-remove-outline" circle />
+            </el-popconfirm>
+          </el-tooltip>
 
           <!-- 杀死Task -->
-          <el-popconfirm title="你确定要杀死此任务？" @onConfirm="kill_task" @onCancel="$message('取消操作')">
-            <el-button slot="reference" type="danger" icon="el-icon-delete" circle />
-          </el-popconfirm>
+          <el-tooltip class="item" effect="dark" content="杀死任务" placement="top-start">
+            <el-popconfirm title="你确定要杀死此任务？" @onConfirm="kill_task" @onCancel="$message('取消操作')">
+              <el-button slot="reference" type="danger" icon="el-icon-delete" circle />
+            </el-popconfirm>
+          </el-tooltip>
 
           <!-- 查看任务信息 -->
-          <el-popconfirm title="你确定要查看任务信息？" @onConfirm="check_task" @onCancel="$message('取消操作')">
-            <el-button slot="reference" type="success" icon="el-icon-info" circle />
-          </el-popconfirm>
+          <el-tooltip class="item" effect="dark" content="查看信息" placement="top-start">
+            <el-popconfirm title="你确定要查看任务信息？" @onConfirm="check_task" @onCancel="$message('取消操作')">
+              <el-button slot="reference" type="success" icon="el-icon-info" circle />
+            </el-popconfirm>
+          </el-tooltip>
         </el-row>
       </transition>
       <div style="padding: 14px;">
