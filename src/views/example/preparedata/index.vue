@@ -67,7 +67,7 @@
 </template>
 
 <script>
-  import qs from 'qs'
+
   export default {
     data() {
       return {
@@ -231,6 +231,7 @@
           if(this.area_points.length!=0) {
             this.cfg_data['parking_monitoring_area'].push(this.area_points)
             this.active = 1
+            is_success=true
           }
           else {
             this.$message({
@@ -245,7 +246,7 @@
           })
         }
         this.checkList=[]
-        //this.area_points=[]
+        this.area_points=[]
         console.log(this.area_points)
         if(is_success){
         this.$notify({
@@ -257,7 +258,7 @@
         var c=document.getElementById("cvs")
         var ctx=c.getContext("2d")
 
-        //ctx.clearRect(0,0,this.img.width,this.img.height);
+        ctx.clearRect(0,0,this.img.width,this.img.height);
         this.initCanvas(this.data.img_url)
       },
 
@@ -273,10 +274,13 @@
         if(this.data.components.length===1){
           if(this.data.components[0]==='违法占用车道'){
             delete this.cfg_data['parking_monitoring_area']
+
           }else {
             delete this.cfg_data['lane_monitoring_area']
+            delete this.cfg_data['lane_no_allow_cars']
           }
         }
+
         if(c_length===2){
             if(l_length===0||p_length===0){
                   if(l_length===0){
@@ -312,22 +316,10 @@
           this.form['cfg_data']=this.cfg_data
           this.form['task_type']=this.data.task_type
 
-          var data={
-            task_name:"lot_15.mp4",
-            cfg_data:{filename: "lot_15.mp4",
-              parking_monitoring_area: [[[1250, 800], [1250, 400], [750, 400], [750, 800]]],
-              lane_monitoring_area: [[[1250, 800], [1250, 400], [750, 400], [750, 800]]],
-              lane_no_allow_cars: {"2": ["car"]}},
-            task_type:"crossRoadsTask"
-          }
-
-          var data1={
-            name:'chenxiao'
-          }
           console.log(this.form)
           console.log('调用了')
 
-          this.$axios.post(submit_task_url, qs.stringify(data1)).then(res => {
+          this.$axios.post(submit_task_url, this.form).then(res => {
             if (!res.data['is_success']) {
               this.$message.error(res.data['info'])
             } else {  // 任务提交成功成功弹出消息进行提示
@@ -335,7 +327,9 @@
                 message: res.data['info'],
                 type: 'success'
               })
+              this.$router.push({path:'/example/index'})
             }
+
           }).catch(error=>{
             console.log(error)
           })
@@ -343,8 +337,8 @@
           this.$message.error(content)
         }
 
-        //console.log("flag的值为" +  this.flag);
-        //this.$router.push({path:'/test',query:{v:this.v}});
+        console.log("flag的值为" +  this.flag);
+
       },
       select_one(){
           console.log('select_one'+this.form1.paint)

@@ -177,7 +177,6 @@ export default {
   },
   // 生命周期 - 挂载完成（访问DOM元素）
   mounted() {
-
   },
   methods: {
     /**

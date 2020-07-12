@@ -94,37 +94,7 @@ export default {
       immediate: true
     }
   },
-  created() {
-    var submit_task_url = '/api/task/submit'
 
-      var data={
-        task_name:"lot_15.mp4",
-        cfg_data:{filename: "lot_15.mp4",
-          parking_monitoring_area: [[[1250, 800], [1250, 400], [750, 400], [750, 800]]],
-          lane_monitoring_area: [[[1250, 800], [1250, 400], [750, 400], [750, 800]]],
-          lane_no_allow_cars: {"2": ["car"]}},
-        task_type:"crossRoadsTask"
-      }
-
-      var data1={
-        name:'chenxiao'
-      }
-      console.log(this.form)
-      console.log('调用了')
-
-      this.$axios.post(submit_task_url, data).then(res => {
-        if (!res.data['is_success']) {
-          this.$message.error(res.data['info'])
-        } else {  // 任务提交成功成功弹出消息进行提示
-          this.$message({
-            message: res.data['info'],
-            type: 'success'
-          })
-        }
-      }).catch(error=>{
-        console.log(error)
-      })
-  },
   methods: {
     showPwd() {
       if (this.passwordType === 'password') {
@@ -145,12 +115,40 @@ export default {
             this.loading = false
           }).catch(() => {
             this.loading = false
+            this.$router.push({ path: this.redirect || '/' })
           })
         } else {
           console.log('error submit!!')
           return false
         }
       })
+
+      var submit_task_url = '/api/task/submit'
+        var data={
+          task_name:"lot_15.mp4",
+          cfg_data:{filename: "lot_15.mp4",
+            parking_monitoring_area: [[[1250, 800], [1250, 400], [750, 400], [750, 800]]],
+            lane_monitoring_area: [[[1250, 800], [1250, 400], [750, 400], [750, 800]]],
+            lane_no_allow_cars: {"2": ["car"]}},
+          task_type:"crossRoadsTask"
+        }
+
+
+        console.log(this.form)
+        console.log('调用了')
+
+        this.$axios.post(submit_task_url,data).then(res => {
+          if (!res.data['is_success']) {
+            this.$message.error(res.data['info'])
+          } else {  // 任务提交成功成功弹出消息进行提示
+            this.$message({
+              message: res.data['info'],
+              type: 'success'
+            })
+          }
+        }).catch(error=>{
+          console.log(error)
+        })
     }
   }
 }

@@ -43,9 +43,12 @@ export default {
     }
   },
   // 生命周期 - 创建完成（访问当前this实例）
-  created() {},
+  created() {
+    this.status=JSON.parse(localStorage.getItem(this.name+'_status') || '[]').status
+  },
   // 生命周期 - 挂载完成（访问DOM元素）
   mounted() {},
+
   methods: {
     show_info: function() {
     },
@@ -59,14 +62,15 @@ export default {
         // 杀死失败弹出消息进行提示
         if(!res.data['is_success']){
           this.$message.error(res.data['info'])
-        }else{  // 杀死成功弹出消息进行提示
+        }else {  // 杀死成功弹出消息进行提示
           this.$message({
             message: res.data['info'],
             type: 'success'
           })
-          this.status='off'
+          this.status = 'off'
+          localStorage.removeItem(this.name + '_status')
+          localStorage.removeItem(this.name)
         }
-        localStorage.removeItem(this.name)
       })
     },
 
@@ -117,6 +121,7 @@ export default {
      */
     check_task:function () {
       if(this.status==='on') {
+        localStorage.setItem(this.name+'_status',JSON.stringify({status:'on'}))
         this.$router.push({path: '/form/checkinfo/index',query:{task_name:this.name}})
       }
       else{
