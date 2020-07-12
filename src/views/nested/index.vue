@@ -43,8 +43,7 @@
                   <el-image
                     style="width: 100%;height: 100%"
                     :src="item"
-                    fit="fit"
-                  @load="onLoad">
+                    fit="fit">
                   </el-image>
                 </el-carousel-item>
               </el-carousel>
@@ -73,6 +72,9 @@ export default {
       width:'',
       height:''
     }
+  },
+  created() {
+    this.height=screen.height*0.8+'px'
   },
   computed: {
     start_time: function() {
@@ -140,12 +142,6 @@ export default {
     },
     pop_dialog() {
         this.dialog_table_visible=true
-    },
-    onLoad(){
-        this.height=screen.height*0.8+'px'
-      console.log(screen.height)
-      console.log(screen.width)
-      console.log(this.height)
     }
   }
 }
