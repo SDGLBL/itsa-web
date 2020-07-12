@@ -2,7 +2,7 @@
 
   <div id="table1">
     <el-row>
-      <el-col v-for="(video_info,index) in videos_info" :key="index" :xs="12" :sm="10" :md="8" :lg="6" :xl="4">
+      <el-col v-for="(video_info,index) in videos_info" :key="index" :xs="12" :sm="10" :md="8" :lg="6" :xl="5">
         <video-card :url="video_info.video_snapshot_url" :name="video_info.video_name" />
       </el-col>
     </el-row>

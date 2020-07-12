@@ -1,7 +1,7 @@
 <template>
   <div id="form1">
     <el-row>
-      <el-col v-for="(task_info,index) in tasks_info" :key="index" :xs="12" :sm="10" :md="8" :lg="6" :xl="4">
+      <el-col v-for="(task_info,index) in tasks_info" :key="index" :xs="12" :sm="10" :md="8" :lg="6" :xl="5">
         <task-card :url="task_info.task_snapshot" :name="task_info.task_name" />
       </el-col>
     </el-row>
