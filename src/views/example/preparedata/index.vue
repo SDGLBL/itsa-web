@@ -113,7 +113,7 @@
     created(){
       this.data=JSON.parse(localStorage.getItem('video') || '[]')
       console.log(this.data)
-
+      submit_data()
     },
     mounted(){
       //console.log("url(\"C://Users//stay night//Desktop//车牌号.jpg\")");

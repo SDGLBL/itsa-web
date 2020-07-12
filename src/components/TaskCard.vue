@@ -153,4 +153,7 @@ export default {
   .task-card {
     margin: 10px;
   }
+  .el-button {
+  margin-left: 10px;
+}
 </style>
