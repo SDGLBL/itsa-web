@@ -111,6 +111,7 @@
 
 <script>
     export default {
+
         name: "index",
 
         data (){
@@ -176,14 +177,14 @@
                 //swf: SWF_URL // 引入静态文件swfF
               },
               sources: [
-                   //{ // 流配置，数组形式，会根据兼容顺序自动切换
-                     //type: 'rtmp/flv',
-                     //src: 'rtmp://58.200.131.2:1935/livetv/hunantv' //这是芒果TV现场直播视频，地址是可以用的，最后需要替换成后端给的项目地址
-                   //}
-                {
-                  type: "rtmp/flv",
-                  src: "rtmp://localhost:1935/live/home"
-                }
+                   { // 流配置，数组形式，会根据兼容顺序自动切换
+                     type: 'rtmp/flv',
+                     src: 'rtmp://58.200.131.2:1935/livetv/hunantv' //这是芒果TV现场直播视频，地址是可以用的，最后需要替换成后端给的项目地址
+                   }
+                //{
+                  //type: "rtmp/flv",
+                  //src: "rtmp://localhost:1935/live/home"
+                //}
               ],
 
               notSupportedMessage: '此视频暂无法播放，请稍后再试', //允许覆盖Video.js无法播放媒体源时显示的默认信息。
