@@ -30,6 +30,11 @@ export default {
       'name'
     ])
   },
+  created() {
+   var data=JSON.parse(sessionStorage.getItem('lot_15.mp4') || '[]')
+    console.log('违规监测数据')
+    console.log(data)
+  },
   data(){
     return {
       form: {

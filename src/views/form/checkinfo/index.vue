@@ -60,22 +60,23 @@
               <el-button
                 size="mini"
                 @click="pop_dialog(scope.$index)">详情</el-button>
-              <el-dialog title="违规拍照记录" :visible.sync="dialog_table_visible" center :append-to-body='true' :lock-scroll="false"   width="80%" >
-                <el-carousel indicator-position="outside" :height="height">
-                  <el-carousel-item v-for="item in criminal_cars_table[scope.$index].criminal_imgs" :key="scope.$index+''">
-                    <el-image
-                      style="width: 100%; height: 100%"
-                      :src="item"
-                      fit="fit"
-                      @load="onLoad">
-                    </el-image>
-                  </el-carousel-item>
-                </el-carousel>
-              </el-dialog>
             </template>
           </el-table-column>
         </el-table>
       </div>
+
+      <el-dialog title="违规拍照记录" :visible.sync="dialog_table_visible" center :append-to-body='true' :lock-scroll="false"   width="80%" >
+        <el-carousel indicator-position="outside" :height="height">
+          <el-carousel-item v-for="(item,index) in criminal_cars_table[row_index].criminal_imgs" :key="index">
+            <el-image
+              style="width: 100%; height: 100%"
+              :src="item"
+              fit="fit"
+              @load="onLoad">
+            </el-image>
+          </el-carousel-item>
+        </el-carousel>
+      </el-dialog>
 
       <!--任务表-->
       <div class="task_table_container">
@@ -133,6 +134,7 @@
             tasks:[
 
             ],
+            row_index:0,
             car_key:0,
             illegal_key:0,
             //表头
@@ -146,15 +148,15 @@
              ],
             // 违规车表
             criminal_cars_table: [
-              {
-              end_time: "2020-05-27 14:14:13",
-              id: "26.0",
-              criminal_imgs: ['static/data/criminal/2020-05-27 14-26-50 483.0 0.jpg',
-                'static/data/criminal/2020-05-27 14-26-50 483.0 1.jpg'],
-              info_type: "pass",
-              number_plate: null,
-              obj_type: 'car'
-              }
+              //{
+              //end_time: "2020-05-27 14:14:13",
+              //id: "26.0",
+              //criminal_imgs: ['static/data/criminal/2020-05-27 14-26-50 483.0 0.jpg',
+                //'static/data/criminal/2020-05-27 14-26-50 483.0 1.jpg'],
+              //info_type: "pass",
+              //number_plate: null,
+              //obj_type: 'car'
+              //}
              ],
             my_timer:null,
 
@@ -209,7 +211,7 @@
           this.$axios.get(task_url).then(res=>{
             this.tasks = res.data ;
           })
-          this.criminal_cars_table=JSON.parse(localStorage.getItem(this.task_name) || '[]')
+          this.criminal_cars_table=JSON.parse(sessionStorage.getItem(this.task_name) || '[]')
           console.log('mounted')
           //设置调用时间间隔
           this.my_timer=setInterval(this.flash_res, 3000);
@@ -218,7 +220,7 @@
         //销毁之前存储违规数据
         beforeDestroy() {
           console.log('取消定时')
-          localStorage.setItem(this.task_name,JSON.stringify(this.criminal_cars_table))
+          sessionStorage.setItem(this.task_name,JSON.stringify(this.criminal_cars_table))
           clearInterval(this.my_timer)
         },
         computed:{
@@ -308,6 +310,7 @@
             })
           },
           pop_dialog(index) {
+            this.row_index=index
             this.dialog_table_visible=true
             console.log('index is')
             console.log(index)
@@ -315,9 +318,10 @@
           },
           onLoad(){
             this.height=screen.height*0.8+'px'
-            console.log(screen.height)
-            console.log(screen.width)
-            console.log(this.height)
+            //console.log(screen.height)
+            //console.log(screen.width)
+            //console.log(this.height)
+            //console.log()
           }
         }
     }
