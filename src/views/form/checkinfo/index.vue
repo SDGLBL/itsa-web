@@ -11,7 +11,13 @@
       </div>
 
       <!-- 车流量表 begin -->
-      <div class="main_traffic_flow_container">
+      <div class="traffic_container">
+      <span class="cars_font">车流量表 </span>
+      <div style="margin-bottom: 3px;">
+        <i class="el-icon-s-help"></i>
+        <span class="cars_font_des">用来记录车流量信息 </span>
+      </div>
+
         <el-table
           :data="pass_count_table"
           style="width: 100%"
@@ -31,17 +37,17 @@
 
     <div class="main_cars_task">
       <div class="cars_container">
-        <span class="cars_font">违规车辆表 </span>
+        <span class="cars_font">违规表 </span>
         <div style="margin-bottom: 3px;">
           <i class="el-icon-s-help"></i>
-          <span class="cars_font_des">用来记录违规车辆信息 </span>
+          <span class="cars_font_des">用来记录违规信息 </span>
         </div>
         <el-table
           :data="criminal_cars_table"
           stripe
           :key='illegal_key'
           border
-          :height=300
+          max-height="400"
           :header-cell-style="{background:'rgba(239,236,236,0.33)'}"
           style="width: 100%"
         >
@@ -87,7 +93,7 @@
         </div>
         <el-table
           :data="tasks"
-          :height=300
+          max-height="400"
           stripe
           border
           style="width: 100%">
@@ -147,7 +153,183 @@
                 //{ 0:"总和",1:"0.0",2:"4.0",3:"1.0",4:"5.0"}
              ],
             // 违规车表
-            criminal_cars_table: [],
+            criminal_cars_table: [
+              {end_time:'qweqw',
+              id:'123',
+              info_type:'车',
+                number_plate:'G13123',
+                obj_type:'哈哈',
+                criminal_imgs:''
+              },
+              {end_time:'qweqw',
+                id:'123',
+                info_type:'车',
+                number_plate:'G13123',
+                obj_type:'哈哈',
+                criminal_imgs:''
+              },
+              {end_time:'qweqw',
+                id:'123',
+                info_type:'车',
+                number_plate:'G13123',
+                obj_type:'哈哈',
+                criminal_imgs:''
+              },
+              {end_time:'qweqw',
+                id:'123',
+                info_type:'车',
+                number_plate:'G13123',
+                obj_type:'哈哈',
+                criminal_imgs:''
+              },
+              {end_time:'qweqw',
+                id:'123',
+                info_type:'车',
+                number_plate:'G13123',
+                obj_type:'哈哈',
+                criminal_imgs:''
+              },
+              {end_time:'qweqw',
+                id:'123',
+                info_type:'车',
+                number_plate:'G13123',
+                obj_type:'哈哈',
+                criminal_imgs:''
+              },
+              {end_time:'qweqw',
+                id:'123',
+                info_type:'车',
+                number_plate:'G13123',
+                obj_type:'哈哈',
+                criminal_imgs:''
+              },
+              {end_time:'qweqw',
+                id:'123',
+                info_type:'车',
+                number_plate:'G13123',
+                obj_type:'哈哈',
+                criminal_imgs:''
+              },
+              {end_time:'qweqw',
+                id:'123',
+                info_type:'车',
+                number_plate:'G13123',
+                obj_type:'哈哈',
+                criminal_imgs:''
+              },
+              {end_time:'qweqw',
+                id:'123',
+                info_type:'车',
+                number_plate:'G13123',
+                obj_type:'哈哈',
+                criminal_imgs:''
+              },
+              {end_time:'qweqw',
+                id:'123',
+                info_type:'车',
+                number_plate:'G13123',
+                obj_type:'哈哈',
+                criminal_imgs:''
+              },
+              {end_time:'qweqw',
+                id:'123',
+                info_type:'车',
+                number_plate:'G13123',
+                obj_type:'哈哈',
+                criminal_imgs:''
+              },
+              {end_time:'qweqw',
+                id:'123',
+                info_type:'车',
+                number_plate:'G13123',
+                obj_type:'哈哈',
+                criminal_imgs:''
+              },
+              {end_time:'qweqw',
+                id:'123',
+                info_type:'车',
+                number_plate:'G13123',
+                obj_type:'哈哈',
+                criminal_imgs:''
+              },
+              {end_time:'qweqw',
+                id:'123',
+                info_type:'车',
+                number_plate:'G13123',
+                obj_type:'哈哈',
+                criminal_imgs:''
+              },
+              {end_time:'qweqw',
+                id:'123',
+                info_type:'车',
+                number_plate:'G13123',
+                obj_type:'哈哈',
+                criminal_imgs:''
+              },
+              {end_time:'qweqw',
+                id:'123',
+                info_type:'车',
+                number_plate:'G13123',
+                obj_type:'哈哈',
+                criminal_imgs:''
+              },
+              {end_time:'qweqw',
+                id:'123',
+                info_type:'车',
+                number_plate:'G13123',
+                obj_type:'哈哈',
+                criminal_imgs:''
+              },
+              {end_time:'qweqw',
+                id:'123',
+                info_type:'车',
+                number_plate:'G13123',
+                obj_type:'哈哈',
+                criminal_imgs:''
+              },
+              {end_time:'qweqw',
+                id:'123',
+                info_type:'车',
+                number_plate:'G13123',
+                obj_type:'哈哈',
+                criminal_imgs:''
+              },
+              {end_time:'qweqw',
+                id:'123',
+                info_type:'车',
+                number_plate:'G13123',
+                obj_type:'哈哈',
+                criminal_imgs:''
+              },
+              {end_time:'qweqw',
+                id:'123',
+                info_type:'车',
+                number_plate:'G13123',
+                obj_type:'哈哈',
+                criminal_imgs:''
+              },
+              {end_time:'qweqw',
+                id:'123',
+                info_type:'车',
+                number_plate:'G13123',
+                obj_type:'哈哈',
+                criminal_imgs:''
+              },
+              {end_time:'qweqw',
+                id:'123',
+                info_type:'车',
+                number_plate:'G13123',
+                obj_type:'哈哈',
+                criminal_imgs:''
+              },
+              {end_time:'qweqw',
+                id:'123',
+                info_type:'车',
+                number_plate:'G13123',
+                obj_type:'哈哈',
+                criminal_imgs:''
+              }
+            ],
             my_timer:null,
 
             //视频数据
@@ -201,7 +383,7 @@
           this.$axios.get(task_url).then(res=>{
             this.tasks = res.data ;
           })
-          this.criminal_cars_table=JSON.parse(sessionStorage.getItem(this.task_name) || '[]')
+          //  this.criminal_cars_table=JSON.parse(sessionStorage.getItem(this.task_name) || '[]')
           console.log('mounted')
           //设置调用时间间隔
           this.my_timer=setInterval(this.flash_res, 3000);
@@ -358,14 +540,7 @@
     height : 486px ;
   }
 
-  .main_traffic_flow_container{
-    display: flex;
-    margin-top: 60PX;
-    margin-left: 25px;
-    padding: 8px;
-    width:700px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04)
-  }
+
 
   .blank{
     width: 100%;
@@ -393,6 +568,7 @@
     margin-top: 10px;
     padding: 8px;
     margin-left: 25px;
+    margin-right: 10px;
     width: 350px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04)
   }
@@ -438,7 +614,14 @@
     justify-content: center;
   }
 
-
+  .traffic_container{
+    display: flex;
+    flex-direction: column;
+    padding: 8px;
+    width: 1000px;
+    margin-right: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04)
+  }
 
   .canvas_container{
     display: flex;
