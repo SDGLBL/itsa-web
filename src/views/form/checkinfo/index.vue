@@ -233,9 +233,10 @@
               car: '轿车',
               truck: '卡车',
               bus: '巴士',
+              person: '行人',
               illegal_parking: '违章停车',
               illegal_occupation: '违法占用车道',
-              illegal_person: '违规行人检测'
+              illegal_person: '违规行人'
             }
             this.$axios.get(err_url).then(res=>{
 
@@ -256,7 +257,9 @@
 
                   if(this.criminal_cars_table.length===0) {
                     this.criminal_cars_table.push(res.data[0])
-                  }else{
+                  }else if(res.data[0]['number_plate']==='None'){  //行人
+                    this.criminal_cars_table.push(res.data[0])
+                  }else {
                     var flag=true
                     for(let i=0;i<this.criminal_cars_table.length;i++){
                       if(res.data[0]['number_plate']===this.criminal_cars_table[i]['number_plate']&&res.data[0]['info_type']===this.criminal_cars_table[i]['info_type']) {
