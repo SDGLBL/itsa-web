@@ -52,7 +52,8 @@ export default {
   },
   // 生命周期 - 创建完成（访问当前this实例）
   created() {
-    this.status=JSON.parse(sessionStorage.getItem(this.name+'_status') || '[]').status
+    this.status=localStorage.getItem(this.name+'_status')
+    console.log('status值'+this.status)
   },
   // 生命周期 - 挂载完成（访问DOM元素）
   mounted() {},
@@ -76,8 +77,7 @@ export default {
             type: 'success'
           })
           this.status = 'off'
-          sessionStorage.removeItem(this.name + '_status')
-          sessionStorage.removeItem(this.name)
+          localStorage.removeItem(this.name + '_status')
         }
       })
     },
@@ -98,6 +98,7 @@ export default {
             type: 'success'
           })
           this.status='on'
+
         }
       })
       console.log('挂起Task')
@@ -129,7 +130,7 @@ export default {
      */
     check_task:function () {
       if(this.status==='on') {
-        sessionStorage.setItem(this.name+'_status',JSON.stringify({status:'on'}))
+        localStorage.setItem(this.name+'_status',this.status)
         this.$router.push({path: '/form/checkinfo/index',query:{task_name:this.name}})
       }
       else{

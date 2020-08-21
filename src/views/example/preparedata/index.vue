@@ -24,9 +24,9 @@
             <el-form-item label="区域绘制">
               <el-select v-model="form1.paint" placeholder="请选择绘制场景" @change="select_one">
                 <el-option v-for="(item,index) in data.components"
-                             :key="index"
-                             :label="item"
-                             :value="item" border></el-option>
+                           :key="index"
+                           :label="item"
+                           :value="item" border></el-option>
               </el-select>
             </el-form-item>
           </el-form>
@@ -60,9 +60,9 @@
       </el-timeline>
 
     </div>
-      <div>
-        <el-button @click="test" v-show="false">测试</el-button>
-      </div>
+    <div>
+      <el-button @click="test" v-show="false">测试</el-button>
+    </div>
   </div>
 </template>
 
@@ -77,7 +77,7 @@
         },
         obj_type:[
           {obj_name:'巴士',
-          obj_en:'bus'},
+            obj_en:'bus'},
           {obj_name:'卡车',
             obj_en:'truck'},
           {obj_name:'轿车',
@@ -97,11 +97,14 @@
         },
         active: 0,
         checkList: [],
+        selected_component:[],
         cfg_data: {
           filename:'',
           lane_monitoring_area: [
           ],
           parking_monitoring_area: [],
+          //违规行人检测
+          person_monitoring_area:[],
           lane_no_allow_cars:{}
         },
         area_points:[] ,
@@ -223,7 +226,7 @@
           }else{
             this.$message({
               message: '您没有进行违法占用车道标注或选择禁止停车类型,请重新标注或选择',
-                type: 'warning'
+              type: 'warning'
             })
           }
         }else if(this.form1.paint==='违章停车监控'){
@@ -238,6 +241,18 @@
               type: 'warning'
             })
           }
+        }else if(this.form1.paint==='违规行人检测'){
+          if(this.area_points.length!=0) {
+            this.cfg_data['person_monitoring_area'].push(this.area_points)
+            this.active = 1
+            is_success=true
+          }
+          else {
+            this.$message({
+              message: '您没有进行违规行人检测标注,请进行标注',
+              type: 'warning'
+            })
+          }
         }else {
           this.$message({
             message: '您没有选择区域绘制,请进行选择',
@@ -248,11 +263,11 @@
         this.area_points=[]
         console.log(this.area_points)
         if(is_success){
-        this.$notify({
-          title: '提示',
-          message: '单次数据已提交成功',
-          duration: 2000
-        })}
+          this.$notify({
+            title: '提示',
+            message: '单次数据已提交成功',
+            duration: 2000
+          })}
 
         var c=document.getElementById("cvs")
         var ctx=c.getContext("2d")
@@ -262,44 +277,66 @@
       },
 
       submit_all(){
-        this.active = 2 ;
 
         console.log(this.cfg_data) ;
         var l_length=this.cfg_data.lane_monitoring_area.length
         var p_length=this.cfg_data.parking_monitoring_area.length
+        var s_length=this.cfg_data.person_monitoring_area.length
         var c_length=this.data.components.length
         var content=''
         var is_success=true
-        if(this.data.components.length===1){
-          if(this.data.components[0]==='违法占用车道'){
-            delete this.cfg_data['parking_monitoring_area']
 
-          }else {
-            delete this.cfg_data['lane_monitoring_area']
-            delete this.cfg_data['lane_no_allow_cars']
-          }
+
+        //删除this.cfg_data多余的键
+        var z_to_e={
+          违法占用车道:'no',
+          违章停车监控:'no',
+          违规行人检测:'no'
+        }
+        var z_to_e_l={违法占用车道:'lane_monitoring_area',
+                      违章停车监控:'parking_monitoring_area',
+                      违规行人检测:'person_monitoring_area'}
+        for(let i=0;i<this.data.components.length;i++) {
+            if(z_to_e.hasOwnProperty(this.data.components[i])) {
+                  z_to_e[this.data.components[i]]='yes'
+            }
+        }
+        for(let key in z_to_e_l){
+          if(z_to_e[key]==='no')
+            delete this.cfg_data[z_to_e_l[key]]
         }
 
-        if(c_length===2){
-            if(l_length===0||p_length===0){
-                  if(l_length===0){
-                    content='您选择了违法占用车道检测功能，但没有进行标注，请标注'
-                  }else if (p_length===0) {
-                    content='您选择了违章停车监控功能，但没有进行标注，请标注'
-                  }else{
-                    content='您选择了违章停车监控功能和违法占用车道检测功能，但没有进行标注，请标注'
-                  }
-                  is_success=false
+
+        if(c_length===3){
+          if(l_length===0||p_length===0||s_length===0){
+            if(l_length===0){
+              content='您选择了违法占用车道检测功能，但没有进行标注，请标注'
+            }else if (p_length===0) {
+              content='您选择了违章停车监控功能，但没有进行标注，请标注'
+            }else if(s_length===0){
+              content='您选择了违规行人检测功能，但没有进行标注，请标注'
             }
-        }else if(c_length===1) {
+            is_success=false
+          }
+        }else if(c_length===2){
+          if(this.selected_component.length<2){
+            content='你选择两项功能,请检查其中是否有未进行标注的，请标注'
+            is_success=false
+          }
+        } else if(c_length===1) {
           if(this.data.components[0]==='违法占用车道'){
             if (l_length === 0) {
               content = '您选择了违法占用车道检测功能，但没有进行标注，请标注'
               is_success=false
             }
-          }else {
+          }else if(this.data.components[0]==='违章停车监控'){
             if (p_length === 0) {
               content = '您选择了违章停车监控功能，但没有进行标注，请标注'
+              is_success=false
+            }
+          } else {
+            if (s_length === 0) {
+              content = '您选择了违规行人检测功能，但没有进行标注，请标注'
               is_success=false
             }
           }
@@ -310,6 +347,7 @@
 
         var submit_task_url = '/api/task/submit'
         if(is_success) {
+          this.active = 2
           this.cfg_data['filename']=this.data.task_name
           this.form['task_name']=this.data.task_name
           this.form['cfg_data']=this.cfg_data
@@ -328,7 +366,6 @@
               })
               this.$router.push({path:'/example/index'})
             }
-
           }).catch(error=>{
             console.log(error)
           })
@@ -340,12 +377,13 @@
 
       },
       select_one(){
-          console.log('select_one'+this.form1.paint)
-          if(this.form1.paint==='违法占用车道'){
-            this.forbid=true
-          }else {
-            this.forbid=false
-          }
+        this.selected_component.push(this.form1.paint)
+        console.log('select_one'+this.form1.paint)
+        if(this.form1.paint==='违法占用车道'){
+          this.forbid=true
+        }else {
+          this.forbid=false
+        }
 
       },
       test(){

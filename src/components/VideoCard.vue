@@ -49,7 +49,7 @@
     <el-dialog
       title="功能组件选择"
       :visible.sync="select_components_visible"
-      width="30%"
+      width="50%"
       :before-close="handleClose">
       <span>Tip: 选择后, 点击下一步进行交通场景初始化数据准备</span>
       <span slot="footer" class="dialog-footer">
@@ -126,6 +126,10 @@ export default {
           },
           {com_name:'违法占用车道',
             com_type:'LaneMonitoringComponent'
+          },
+          {
+            com_name:'违规行人检测',
+            com_type:'person_monitoring_area'
           }
         ],
         "crossRoadsTaskFake":[
@@ -134,6 +138,10 @@ export default {
           },
           {com_name:'违法占用车道',
             com_type:'LaneMonitoringComponent'
+          },
+          {
+            com_name:'违规行人检测',
+            com_type:'person_monitoring_area'
           }
         ],
         //高速公路场景
@@ -143,6 +151,10 @@ export default {
           },
           {com_name:'违法占用车道',
             com_type:'LaneMonitoringComponent'
+          },
+          {
+            com_name:'违规行人检测',
+            com_type:'person_monitoring_area'
           }
         ],
 
@@ -153,6 +165,10 @@ export default {
           },
           {com_name:'违法占用车道',
             com_type:'LaneMonitoringComponent'
+          },
+          {
+            com_name:'违规行人检测',
+            com_type:'person_monitoring_area'
           }
         ],
         //路口饱和度场景
@@ -164,6 +180,10 @@ export default {
           {
             com_name:'违章停车监控',
             com_type:'ParkingMonitoringComponent'
+          },
+          {
+            com_name:'违规行人检测',
+            com_type:'person_monitoring_area'
           }
         ],
       },
@@ -289,7 +309,6 @@ export default {
         console.log(this.check_selected_components[0])
         if(this.check_selected_components[0]==='违章停车监控'){
           this.wztc_visible=true
-
         }else{
           this.wfzycd_visible=true
         }
@@ -306,7 +325,6 @@ export default {
         //document.getElementById("cvs").style.width=img.width+'px';
         //document.getElementById("cvs").style.height=img.height+'px';
       this.select_components_visible=false;
-
     }
   }
 }

@@ -46,7 +46,7 @@
           style="width: 100%"
         >
           <el-table-column
-            v-for="{ prop, label,align } in criminal_table_config"
+            v-for="{ prop, label,align } in this.criminal_table_config"
             :key="prop"
             :prop="prop"
             :align="align"
@@ -56,16 +56,16 @@
             label="违规图像"
             align="center"
           >
-            <template slot-scope="scope">
-              <el-button
-                size="mini"
-                @click="pop_dialog(scope.$index)">详情</el-button>
-            </template>
+                <template slot-scope="scope">
+                  <el-button
+                    size="mini"
+                    @click="pop_dialog(scope.$index)">详情</el-button>
+                </template>
           </el-table-column>
         </el-table>
       </div>
 
-      <el-dialog title="违规拍照记录" :visible.sync="dialog_table_visible" center :append-to-body='true' :lock-scroll="false"   width="80%" >
+      <el-dialog   v-if="criminal_cars_table.length>0" title="违规拍照记录" :visible.sync="dialog_table_visible" center :append-to-body='true' :lock-scroll="false"   width="80%" >
         <el-carousel indicator-position="outside" :height="height">
           <el-carousel-item v-for="(item,index) in criminal_cars_table[row_index].criminal_imgs" :key="index">
             <el-image
@@ -147,17 +147,7 @@
                 //{ 0:"总和",1:"0.0",2:"4.0",3:"1.0",4:"5.0"}
              ],
             // 违规车表
-            criminal_cars_table: [
-              //{
-              //end_time: "2020-05-27 14:14:13",
-              //id: "26.0",
-              //criminal_imgs: ['static/data/criminal/2020-05-27 14-26-50 483.0 0.jpg',
-                //'static/data/criminal/2020-05-27 14-26-50 483.0 1.jpg'],
-              //info_type: "pass",
-              //number_plate: null,
-              //obj_type: 'car'
-              //}
-             ],
+            criminal_cars_table: [],
             my_timer:null,
 
             //视频数据
@@ -244,7 +234,8 @@
               truck: '卡车',
               bus: '巴士',
               illegal_parking: '违章停车',
-              illegal_occupation: '违法占用车道'
+              illegal_occupation: '违法占用车道',
+              illegal_person: '违规行人检测'
             }
             this.$axios.get(err_url).then(res=>{
 
