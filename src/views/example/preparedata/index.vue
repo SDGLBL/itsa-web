@@ -83,7 +83,13 @@
           {obj_name:'轿车',
             obj_en:'car'},
         ],
-        img:null,
+        img:{
+          width:0,
+          height:0
+        },
+        video_info:{
+
+        },
         //禁止车辆选择
         forbid:false,
         data:{
@@ -119,9 +125,16 @@
     },
     mounted(){
       //console.log("url(\"C://Users//stay night//Desktop//车牌号.jpg\")");
-      this.img=new Image()
-      this.img.src=this.data.img_url
-      this.initCanvas(this.data.img_url)
+      //this.img=new Image()
+      //this.img.src=this.data.img_url
+      var video_info_url='api/video/video_info/' + '?video_name=' + this.data.task_name
+      this.$axios.get(video_info_url).then(res=>{
+        this.video_info=res.data
+        this.img.width=this.video_info['video_shape'][1]
+        this.img.height=this.video_info['video_shape'][0]
+        this.initCanvas(this.data.img_url)
+      })
+
       document.getElementById("canvas-box-container").style.backgroundImage="url(" +this.data.img_url + ")"
       console.log('data'+this.data)
     },
