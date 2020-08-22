@@ -93,7 +93,7 @@
         </div>
         <el-table
           :data="tasks"
-          max-height="400"
+          max-height="200"
           stripe
           border
           style="width: 100%">
@@ -354,14 +354,15 @@
 
   .main_video_container{
     display: flex;
-    margin-top: 60px;
+    margin-top: 5px;
     margin-right: 25px;
     margin-left: 25px;
+    margin-bottom: 50px;
   }
 
   #main_video{
-    width : 750px ;
-    height : 486px ;
+    width : 800px ;
+    height : 480px ;
   }
 
 
@@ -369,7 +370,7 @@
   .blank{
     width: 100%;
     height: 45px;
-    background-color: white;
+    background-color: #f6f9fa;
   }
 
   .main_cars_task{
@@ -442,7 +443,7 @@
     display: flex;
     flex-direction: column;
     padding: 8px;
-    width: 1000px;
+    width: 500px;
     margin-right: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04)
   }
