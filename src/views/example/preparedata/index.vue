@@ -153,6 +153,9 @@
               y: event.pageY - cvsClientRect.y
             });
             // 记录点集合
+            console.log('长宽')
+            console.log(width)
+            console.log(height)
             var x = (event.pageX - cvsClientRect.x) * width / 770;
             var y = (event.pageY - cvsClientRect.y) * height / 432.4;
             //console.log(x)
@@ -294,12 +297,12 @@
           违规行人检测:'no'
         }
         var z_to_e_l={违法占用车道:'lane_monitoring_area',
-                      违章停车监控:'parking_monitoring_area',
-                      违规行人检测:'person_monitoring_area'}
+          违章停车监控:'parking_monitoring_area',
+          违规行人检测:'person_monitoring_area'}
         for(let i=0;i<this.data.components.length;i++) {
-            if(z_to_e.hasOwnProperty(this.data.components[i])) {
-                  z_to_e[this.data.components[i]]='yes'
-            }
+          if(z_to_e.hasOwnProperty(this.data.components[i])) {
+            z_to_e[this.data.components[i]]='yes'
+          }
         }
         for(let key in z_to_e_l){
           if(z_to_e[key]==='no')
